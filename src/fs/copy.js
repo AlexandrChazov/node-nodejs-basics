@@ -1,8 +1,8 @@
-import { access, constants, cp  } from "fs";
+import { access, constants, cp } from "fs";
 const copy = async () => {
 	const sourcePath = `${import.meta.dirname}/files`;
 	const destPath = `${import.meta.dirname}/files_copy`;
-	access(destPath, constants.O_DIRECTORY, (err) => {
+	access(destPath, constants.F_OK, (err) => {
 		if (!err) throw new Error("FS operation failed");
 		cp(sourcePath, destPath, { recursive: true }, () => {})
 	})
