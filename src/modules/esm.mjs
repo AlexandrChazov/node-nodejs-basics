@@ -8,14 +8,14 @@ const random = Math.random();
 let unknownObject;
 
 if (random > 0.5) {
-    unknownObject = await import('./files/a.json', {
-        assert: {
-            type: 'json'
+    unknownObject = await import("./files/a.json", {
+       with: {
+            type: "json"
         }
-    });
+    })
 } else {
     unknownObject = await import('./files/b.json', {
-        assert: {
+        with: {
             type: 'json'
         }
     });
