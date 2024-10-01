@@ -2,8 +2,8 @@ import { Transform } from "stream";
 
 class Reverse extends Transform {
 	_transform(chunk, encoding, callback) {
-		const reversed = chunk.toString().split("").reverse().join("");
-		this.push(reversed);
+		const reversed = chunk.toString().trim().split("").reverse().join("");
+		this.push(`${reversed}\n`);
 		callback();
 	}
 }
