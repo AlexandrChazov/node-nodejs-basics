@@ -12,3 +12,7 @@ const echoInput = (chunk) => {
 };
 
 process.stdin.on('data', echoInput);
+/*
+* При использовании метода fork() мы можем обмениваться сообщениями следующим образом:
+* process.send('New message');
+*/
