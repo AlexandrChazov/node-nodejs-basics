@@ -4,7 +4,6 @@ const spawnChildProcess = async (args) => {
 
 	// Передаём ввод в терминал родительского процесса дочернему
 	process.stdin.pipe(child.stdin);
-
 	// Передаём вывод в терминал дочернего процесса родительскому
 	child.stdout.pipe(process.stdout);
 
@@ -20,7 +19,7 @@ const forkChildProcess = async (args) => {
 	const child = fork(`${import.meta.dirname}/files/script.js`, args);
 
 	child.on('message', (message) => {
-		console.log(message)
+		process.stdout.write(`Received from child process: ${message}`)
 	})
 	child.on('exit', (code) => {
 		console.log(`Child process exited with exit code ${code}`);
