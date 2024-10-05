@@ -1,12 +1,11 @@
 import { spawn } from "child_process";
 const spawnChildProcess = async (args) => {
-	const child = spawn('node', ['src/cp/files/script.js', ...args], {
-		stdio: ['pipe', 'pipe', 'pipe', 'ipc']
-	});
-	// Forward data from master process stdin to child process stdin
+	const child = spawn('node', ['src/cp/files/script.js', ...args]);
+
+	// Передаём ввод в терминал родительского процесса дочернему
 	process.stdin.pipe(child.stdin);
 
-	// Forward data from child process stdout to master process stdout
+	// Передаём вывод в терминал дочернего процесса родительскому
 	child.stdout.pipe(process.stdout);
 
 	child.on('exit', (code) => {
