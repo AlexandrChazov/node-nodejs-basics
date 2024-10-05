@@ -13,7 +13,7 @@ const spawnChildProcess = async (args) => {
 		console.log(`Child process exited with exit code ${code}`);
 	});
 	child.on('error', (err) => {
-		console.log("Something went wrong", err);
+		console.error("Something went wrong", err);
 	});
 };
 

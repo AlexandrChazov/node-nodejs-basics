@@ -1,5 +1,6 @@
 import { createReadStream, createWriteStream } from "fs";
 import { createGzip } from "zlib";
+
 const compress = async () => {
     const sourcePath = `${import.meta.dirname}/files/fileToCompress.txt`;
     const distPath = `${import.meta.dirname}/files/archive.gz`;
@@ -8,7 +9,7 @@ const compress = async () => {
 		const writeStream = createWriteStream(distPath);
 
 		function handleError(err) {
-			console.log("Finished with error...");
+			console.error("Finished with error...");
 			readStream.destroy();
 			writeStream.end("Finished with error...");
 		}
