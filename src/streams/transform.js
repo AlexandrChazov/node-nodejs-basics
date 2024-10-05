@@ -1,9 +1,10 @@
-import { Transform } from "stream";
+import { Transform } from 'stream';
+import { EOL } from 'os';
 
 class Reverse extends Transform {
 	_transform(chunk, encoding, callback) {
 		const reversed = chunk.toString().trim().split("").reverse().join("");
-		this.push(`${reversed}\n`);
+		this.push(`${reversed}${EOL}`);
 		callback();
 	}
 }
