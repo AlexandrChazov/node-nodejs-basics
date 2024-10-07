@@ -8,7 +8,7 @@ const echoInput = (chunk) => {
     if (chunkStringified.includes('CLOSE')) process.exit(0);
     process.stdout.write(`Received from master process: ${chunk.toString()}`)
     // При использовании метода fork() мы можем обмениваться сообщениями следующим образом:
-    // process.send(`${chunk.toString()}`)
+    process.send(`${chunk.toString()}`)
 };
 
 process.stdin.on('data', echoInput);

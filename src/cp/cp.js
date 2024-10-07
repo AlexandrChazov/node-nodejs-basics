@@ -30,5 +30,5 @@ const forkChildProcess = async (args) => {
 };
 
 // Put your arguments in function call to test this functionality
-// forkChildProcess( ['hello', 'world']);
-spawnChildProcess( ['hello', 'world']);
+forkChildProcess( ['hello', 'world']);
+// spawnChildProcess( ['hello', 'world']);
