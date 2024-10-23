@@ -1,4 +1,4 @@
-import { writeFile, access, constants } from "fs";
+import { writeFile, access, constants } from "node:fs";
 const create = async () => {
     const filePath = `${import.meta.dirname}/files/fresh.txt`;
     access(filePath, constants.F_OK, (err) => {

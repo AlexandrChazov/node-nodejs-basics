@@ -1,4 +1,4 @@
-import fs, { access, constants } from "fs";
+import fs, { access, constants } from "node:fs";
 const rename = async () => {
 	const wrongFilePath = `${import.meta.dirname}/files/wrongFilename.txt`;
 	const properFilePath = `${import.meta.dirname}/files/properFilename.md`;

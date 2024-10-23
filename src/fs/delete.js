@@ -1,4 +1,4 @@
-import { access, constants, rm } from "fs";
+import { access, constants, rm } from "node:fs";
 
 const remove = async () => {
 	const filePath = `${import.meta.dirname}/files/fileToRemove.txt`

@@ -1,5 +1,5 @@
-import { createReadStream } from "fs";
-import { createHash } from "crypto";
+import { createReadStream } from "node:fs";
+import { createHash } from "node:crypto";
 const calculateHash = async () => {
 	const filePath = `${import.meta.dirname}/files/fileToCalculateHashFor.txt`
   const readStream = createReadStream(filePath);

@@ -1,4 +1,4 @@
-import { fork, spawn } from "child_process";
+import { fork, spawn } from "node:child_process";
 const spawnChildProcess = async (args) => {
 	const child = spawn('node', ['src/cp/files/script.js', ...args]);
 

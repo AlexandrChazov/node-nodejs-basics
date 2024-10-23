@@ -1,5 +1,5 @@
-import { EOL } from "os";
-import { createReadStream } from "fs";
+import { EOL } from "node:os";
+import { createReadStream } from "node:fs";
 
 const read = async () => {
 	const filePath = `${import.meta.dirname}/files/fileToRead.txt`;

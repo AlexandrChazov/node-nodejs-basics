@@ -1,4 +1,4 @@
-import { access, constants, cp } from "fs";
+import { access, constants, cp } from "node:fs";
 const copy = async () => {
 	const sourcePath = `${import.meta.dirname}/files`;
 	const destPath = `${import.meta.dirname}/files_copy`;

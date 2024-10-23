@@ -1,5 +1,5 @@
-import { Transform } from 'stream';
-import { EOL } from 'os';
+import { Transform } from 'node:stream';
+import { EOL } from 'node:os';
 
 class Reverse extends Transform {
 	_transform(chunk, encoding, callback) {
