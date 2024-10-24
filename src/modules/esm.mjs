@@ -1,7 +1,7 @@
-import path from 'path';
-import { release, version } from 'os';
-import { createRequire } from 'module';
-import { createServer as createServerHttp } from 'http';
+import path from 'node:path';
+import { release, version } from 'node:os';
+import { createRequire } from 'node:module';
+import { createServer as createServerHttp } from 'node:http';
 import './files/c.js';
 
 const random = Math.random();

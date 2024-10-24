@@ -1,4 +1,4 @@
-import { createWriteStream } from "fs";
+import { createWriteStream } from "node:fs";
 const write = async () => {
 	const filePath = `${import.meta.dirname}/files/fileToWrite.txt`;
 

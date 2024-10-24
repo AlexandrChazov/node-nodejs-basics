@@ -1,23 +1,31 @@
-import { createReadStream, createWriteStream } from "fs";
-import { createGzip } from "zlib";
+import { createReadStream, createWriteStream, rm } from "node:fs";
+import { join } from "node:path";
+import { pipeline } from "node:stream/promises";
+import { createGzip } from "node:zlib";
+
+const dirname = import.meta.dirname;
+
 const compress = async () => {
-    const sourcePath = `${import.meta.dirname}/files/fileToCompress.txt`;
-    const distPath = `${import.meta.dirname}/files/archive.gz`;
-		const gzip = createGzip();
+    const sourcePath = join(dirname, "files", "fileToCompress.txt");
+    const distPath = join(dirname, "files", "archive.gz");
 		const readStream = createReadStream(sourcePath);
 		const writeStream = createWriteStream(distPath);
 
-		function handleError(err) {
-			console.log("Finished with error...");
-			readStream.destroy();
-			writeStream.end("Finished with error...");
-		}
+		const gzip = createGzip();
 
-		readStream
-			.on("error", handleError)
-			.pipe(gzip)
-			.pipe(writeStream)
-			.on("error", handleError);
+		readStream.on("close", deleteFile(sourcePath));
+
+		await pipeline(readStream, gzip, writeStream);
 };
 
-await compress();
+compress().catch((err) => {
+	throw new Error(err);
+});
+
+function deleteFile(path) {
+	return function () {
+		rm(path, (err) => {
+			if (err) console.error("Failed to delete source file");
+		})
+	}
+}

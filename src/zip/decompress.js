@@ -1,23 +1,31 @@
-import { createReadStream, createWriteStream } from "fs";
-import { createUnzip } from "zlib";
+import { createReadStream, createWriteStream, rm } from "node:fs";
+import { join } from "node:path";
+import { pipeline } from "node:stream/promises";
+import { createUnzip } from "node:zlib";
+
+const dirname = import.meta.dirname;
+
 const decompress = async () => {
-	const sourcePath = `${import.meta.dirname}/files/archive.gz`;
-	const destPath = `${import.meta.dirname}/files/fileToCompress.txt`;
+	const sourcePath = join(dirname, "files", "archive.gz");
+	const destPath = join(dirname, "files", "fileToCompress.txt");
 	const readStream = createReadStream(sourcePath);
 	const writeStream = createWriteStream(destPath);
+
 	const unzip = createUnzip();
 
-	function handleError() {
-		console.log("Decompressed with error");
-		readStream.destroy();
-		writeStream.end("Finished with error...")
-	}
+	readStream.on("close", deleteFile(sourcePath));
 
-	readStream
-		.on("error", handleError)
-		.pipe(unzip)
-		.pipe(writeStream)
-		.on("error", handleError);
+	await pipeline(readStream, unzip, writeStream);
 };
 
-await decompress();
+decompress().catch((err) => {
+	throw new Error(err);
+});
+
+function deleteFile(path) {
+	return function () {
+		rm(path, (err) => {
+			if (err) console.error("Failed to delete source file");
+		})
+	}
+}
